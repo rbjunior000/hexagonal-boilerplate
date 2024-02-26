@@ -1,21 +1,21 @@
 type PaginationInput = {
   page: number;
-  pageSize: number
-}
+  pageSize: number;
+};
 
 type SortInput = {
-  order?: 'DESC' | 'ASC'
-}
+  order?: 'DESC' | 'ASC';
+};
 
 export type PaginateOutput<T> = {
-  docs: T[]
-  page: number
-  limit: number
-  total: number
-}
+  docs: T[];
+  page: number;
+  limit: number;
+  total: number;
+};
 
 export const calculateSkip = (page: number, limit: number) => {
-  return +((page - 1) * limit)
-}
+  return +((page - 1) * limit);
+};
 
-export type SortPaginationInput<T> = T & SortInput & PaginationInput
+export type SortPaginationInput<T> = T & SortInput & PaginationInput;

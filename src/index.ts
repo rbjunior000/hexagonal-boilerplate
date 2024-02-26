@@ -1,3 +1,3 @@
-import 'dotenv/config'
-import './module-alias'
-import './app'
+import 'dotenv/config';
+import './module-alias';
+import './app';
