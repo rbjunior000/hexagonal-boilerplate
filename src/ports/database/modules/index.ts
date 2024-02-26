@@ -1,5 +1,5 @@
-import { IUserRepository } from './user'
+import { IUserRepository } from './user';
 
 export type IRepositories = {
-  user: IUserRepository
-}
+  user: IUserRepository;
+};
