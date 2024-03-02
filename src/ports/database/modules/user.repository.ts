@@ -13,4 +13,5 @@ export type IUserRepository = {
   findByEmail(email: string): Promise<User>
   create(data: User, opts?: IDatabaseOptions): Promise<User>
   updateById(id: string, data: Partial<User>, opts?: IDatabaseOptions): Promise<User>
+  destroyUser(id: string): Promise<User>
 }

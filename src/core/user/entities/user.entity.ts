@@ -1,10 +1,5 @@
 import { z } from 'zod'
-import { v4 as uuidv4 } from 'uuid';
 
-const withID = (entity: Record<string, any>) => ({
-  id: uuidv4(),
-  ...entity,
-})
 export enum UserStatusEnum {
   'ACTIVE' = 'ACTIVE',
   'INACTIVE' = 'INACTIVE',
@@ -49,7 +44,7 @@ export class User {
   updatedAt?: Date
 
   constructor(user: Omit<UserEntity, 'id'>) {
-    Object.assign(this, UserSchema.parse(withID(user)))
+    Object.assign(this, UserSchema.parse(user))
   }
 
   isActive() {

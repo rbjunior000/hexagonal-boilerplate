@@ -1,4 +1,4 @@
-import { IUserRepository } from './user'
+import { IUserRepository } from './user.repository'
 
 export type IRepositories = {
   user: IUserRepository

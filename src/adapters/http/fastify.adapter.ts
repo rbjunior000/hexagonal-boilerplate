@@ -2,9 +2,8 @@ import Fastify, { FastifyReply, FastifyRequest } from 'fastify'
 
 import { env } from '@/config'
 import { IDependencies } from '@/core/shared/types'
-import { IServer, UserHttp } from '@/ports/http'
+import { AuthHttp, IServer, UserHttp } from '@/ports/http'
 import { withError } from '@/support'
-import { AuthHttp } from '@/ports/http/modules/auth'
 
 const PORT = env('PORT')
 

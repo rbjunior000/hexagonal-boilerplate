@@ -3,7 +3,7 @@ import { IRepositoriesOpts } from '@/ports/database'
 import { Database } from './adapters/prisma'
 import { Cache } from './adapters/redis'
 import { JWT } from './adapters/jwt'
-import { Bcrypt } from './adapters/crypt'
+import { Bcrypt } from './adapters/bcrypt'
 
 const RepositoriesOpts: IRepositoriesOpts = {
   Cache

@@ -1,19 +1,18 @@
 import { IRepositoriesOpts } from "@/ports/database";
-import { IUserRepository } from "@/ports/database/modules/user";
 import { PrismaClient } from '@prisma/client'
 import { User } from '@/core/user/entities'
-import { PaginateInput, FindInput } from '@/ports/database/modules/user'
 import { calculateSkip } from "@/ports/database/support";
+import { IUserRepository } from "@/ports/database/modules/user.repository";
 
 const prisma = new PrismaClient();
 
 export const user = (args: IRepositoriesOpts): IUserRepository => ({
-  async create(data: User) {
+  async create(data) {
     const model = await prisma.user.create({ data })
     const user = new User(model);
     return user
   },
-  async find(data:FindInput ) {
+  async find(data) {
     const list = await prisma.user.findMany({
       where: {
         name: data.name,
@@ -21,8 +20,8 @@ export const user = (args: IRepositoriesOpts): IUserRepository => ({
     })
     return list.map((user) => new User(user))
   },
-  async paginate(data: PaginateInput) {
-    const list = await prisma.$transaction([
+  async paginate(data) {
+    const list = await Promise.all([
       prisma.user.count(),
       prisma.user.findMany({ take: data.pageSize, skip: calculateSkip(data.page, data.pageSize) })
     ])
@@ -34,20 +33,24 @@ export const user = (args: IRepositoriesOpts): IUserRepository => ({
       total: list[0]
     }
   },
-  async findById(id: string) {
+  async findById(id) {
     const user = await prisma.user.findUnique({where: { id }})
     if (!user) {
       throw new Error('Usuario não existe')
     }
     return new User(user)
   },
-  async updateById(id: string, data: Partial<User>) {
+  async updateById(id, data) {
     const user = await prisma.user.update({ where: { id }, data })
     return new User(user)
   },
   async findByEmail(email: string) {
     const user = await prisma.user.findFirstOrThrow({ where: { email } })
-    console.log({adpkoapdskapo : user})
     return new User(user)
   },
+  async destroyUser(id) {
+    const user = await prisma.user.delete({ where: { id }})
+    
+    return new User(user)
+  }
 })

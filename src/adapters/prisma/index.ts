@@ -1,11 +1,8 @@
-import { env } from "@/config";
 import { PrismaClient } from '@prisma/client'
 import { Repositories } from './modules'
 import { IDatabase } from "@/ports/database";
 
 const prisma = new PrismaClient();
-
-// const POSTGRES_URL = env('DATABASE_URL')
 
 const connect = async () => prisma.$connect().then(() => console.log(`connected`)).catch((err) => console.log("error",err))
 

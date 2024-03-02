@@ -5,7 +5,9 @@ export type IRoute<T, E, K, P, Q> = {
   method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE'
   execute: (input: IRouteInput<T, E, K, P>, context: IContext) => Q
   statusResponseCode?: number
+  authMiddleware?: any
 }
+
 export type IRouteInput<T, E, K, P> = {
   query: T
   params: E
